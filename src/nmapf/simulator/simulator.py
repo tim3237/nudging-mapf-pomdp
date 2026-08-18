@@ -68,9 +68,15 @@ class Simulator:
     def get_simulation_history(self, policy=None):
         self.state.clear_allocation()
         if policy is not None:
-            _, state_value = policy(self.state, self.last_reward)
-            state_value = state_value.to(self.cache_device)
+            policy_out = policy(self.state, self.last_reward)
+            if isinstance(policy_out, tuple):
+                state_value = policy_out[1].to(self.cache_device)
+            else:
+                state_value = None
         else:
+            state_value = None
+            
+        if state_value is None:
             # simple state value estimate: assume agent number to decrease linearly
             # variable naming assumes ConstantReward, although the only requirement is that 0 is the maximum reward
             # should be useful if the worst-case step reward is -#agents_left

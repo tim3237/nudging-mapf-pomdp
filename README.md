@@ -1,4 +1,6 @@
 # Nudging-Based MAPF as POMDP
+**Status:** work-in-progress  -- this repo supports a larger research manuscript that is still being prepared.
+
 This repository implements a nudging-based variant of the Multi-Agent Pathfinding Problem (MAPF). In this setting, agents move autonomously to their destination, and the policy cannot directly control them. Instead, it can send messages that suggest intermediate goals for each agent at each timestep. Because agents' private goals are not directly accessible to the policy, the environment is modelled as a partially observable Markov decision process (POMDP). Suggested goals are chosen from a set of points of interest (POIs), and messages may also be empty or instruct an agent to drop its current intermediate goal.
 
 The simulation has a preset room layout but also allows to generate random layouts such as the following:
